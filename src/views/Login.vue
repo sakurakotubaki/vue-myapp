@@ -16,8 +16,8 @@
     </div>
   </form>
   <div class="form-footer">
-    <p><a href="#">アカウントの作成</a></p>
-    <p><a href="#">パスワードを忘れてしまった</a></p>
+    <p><router-link to="/register">アカウントの作成</router-link></p>
+    <p><router-link to="/">パスワードを忘れてしまった</router-link></p>
   </div>
 </div>
   </div>
