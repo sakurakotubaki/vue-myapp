@@ -5,14 +5,14 @@
   <form>
     <div class="form-item">
       <label for="email"></label>
-      <input type="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
+      <input type="email" v-model="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
     </div>
     <div class="form-item">
       <label for="password"></label>
-      <input type="password" name="password" required="required" placeholder="パスワードを入力してください" />
+      <input type="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
     </div>
     <div class="button-panel">
-      <input type="submit" class="button" title="Sign In" value="新規登録" />
+      <input type="submit" @click="createUser" class="button" title="Sign In" value="新規登録" />
     </div>
   </form>
 </div>
@@ -20,6 +20,33 @@
 </template>
 
 <script>
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+const auth = getAuth();
+
+export default {
+  name: 'Signup',
+  data: () => {
+    return {
+      email: '',
+      password: '',
+      error: null,
+    }
+  },
+  methods: {
+    createUser() {
+      createUserWithEmailAndPassword(this.auth, this.email, this.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // ..
+      });
+    }
+  }
+}
 
 </script>
 
