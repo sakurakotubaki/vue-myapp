@@ -20,7 +20,10 @@
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import { collection, addDoc } from "firebase/firestore"
+import DB from '@/config/firebase'
+
 const auth = getAuth();
 
 export default {
