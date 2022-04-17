@@ -2,7 +2,7 @@
   <div id="app">
     <nav>
       <router-link to="/">ホーム</router-link> |
-      <router-link to="/about">ログイン</router-link>
+      <router-link to="/login">ログイン</router-link>
     </nav>
     <router-view/>
   </div>
