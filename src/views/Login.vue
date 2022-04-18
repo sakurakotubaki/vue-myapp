@@ -1,33 +1,28 @@
 <template>
   <div class="about">
     <div class="form-wrapper">
-      <h1>Sign In</h1>
-      <form>
-        <div class="form-item">
-          <label for="email"></label>
-          <input type="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
-        </div>
-        <div class="form-item">
-          <label for="password"></label>
-          <input type="password" name="password" required="required" placeholder="パスワードを入力してください" />
-        </div>
-        <div class="button-panel">
-          <input type="submit" @click="SignIn" class="button" title="Sign In" value="ログイン" />
-        </div>
-      </form>
-      <div class="form-footer">
-        <p><router-link to="/register">アカウントの作成</router-link></p>
-        <p><router-link to="/">パスワードを忘れてしまった</router-link></p>
-      </div>
+  <h1>Sign Up</h1>
+  <form @submit.prevent="signIn">
+    <div class="form-item">
+      <input type="email" autocomplete="email" v-model="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
     </div>
+    <div class="form-item">
+      <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="メールアドレスを入力してください" />
+    </div>
+    <div class="button-panel">
+      <button type="submit" class="button">ログインする</button>
+    </div>
+  </form>
+</div>
   </div>
 </template>
 
 <script>
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/config/firebase";
 
 export default {
-  name: 'Signup',
+  name: 'signIn',
   data: () => {
     return {
       email: '',
@@ -36,17 +31,15 @@ export default {
     }
   },
   methods: {
-    SignIn() {
-      let auth = getAuth();
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          console.log('ログイン成功')
-        })
-        .catch((error) => {
-          console.error(error)
-        });
+    async signIn() {
+        console.log('ログインしました')
+        try {
+          await signInWithEmailAndPassword(auth, this.email, this.password)
+          // トップページへリダイレクト
+          await this.$router.push("/")
+      } catch (error){
+        console.error(error)
+      }
     }
   }
 }
@@ -60,21 +53,17 @@ export default {
 /* fontawesome */
 @import url(http://weloveiconfonts.com/api/?family=fontawesome);
 [class*="fontawesome-"]:before {
-  font-family: "FontAwesome", sans-serif;
+  font-family: 'FontAwesome', sans-serif;
 }
 
 /* Simple Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* body */
 body {
   background: #e9e9e9;
   color: #5e5e5e;
-  font: 400 87.5%/1.5em "Open Sans", sans-serif;
+  font: 400 87.5%/1.5em 'Open Sans', sans-serif;
 }
 
 /* Form Layout */
@@ -104,7 +93,7 @@ form {
   border: none;
   border-bottom: 2px solid #e9e9e9;
   color: #666;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 1em;
   height: 50px;
   transition: border-color 0.3s;
@@ -127,7 +116,7 @@ form {
   color: #fff;
   cursor: pointer;
   height: 50px;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 1.2em;
   letter-spacing: 0.05em;
   text-align: center;
