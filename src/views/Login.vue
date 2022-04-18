@@ -1,31 +1,29 @@
 <template>
   <div class="about">
     <div class="form-wrapper">
-  <h1>Sign In</h1>
-  <form>
-    <div class="form-item">
-      <label for="email"></label>
-      <input type="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
+      <h1>Sign In</h1>
+      <form>
+        <div class="form-item">
+          <label for="email"></label>
+          <input type="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
+        </div>
+        <div class="form-item">
+          <label for="password"></label>
+          <input type="password" name="password" required="required" placeholder="パスワードを入力してください" />
+        </div>
+        <div class="button-panel">
+          <input type="submit" class="button" title="Sign In" value="ログイン" />
+        </div>
+      </form>
+      <div class="form-footer">
+        <p><router-link to="/register">アカウントの作成</router-link></p>
+        <p><router-link to="/">パスワードを忘れてしまった</router-link></p>
+      </div>
     </div>
-    <div class="form-item">
-      <label for="password"></label>
-      <input type="password" name="password" required="required" placeholder="パスワードを入力してください" />
-    </div>
-    <div class="button-panel">
-      <input type="submit" class="button" title="Sign In" value="ログイン" />
-    </div>
-  </form>
-  <div class="form-footer">
-    <p><router-link to="/register">アカウントの作成</router-link></p>
-    <p><router-link to="/">パスワードを忘れてしまった</router-link></p>
-  </div>
-</div>
   </div>
 </template>
 
-<script>
-
-</script>
+<script></script>
 
 <style scoped>
 /* Fonts */
@@ -34,17 +32,21 @@
 /* fontawesome */
 @import url(http://weloveiconfonts.com/api/?family=fontawesome);
 [class*="fontawesome-"]:before {
-  font-family: 'FontAwesome', sans-serif;
+  font-family: "FontAwesome", sans-serif;
 }
 
 /* Simple Reset */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 /* body */
 body {
   background: #e9e9e9;
   color: #5e5e5e;
-  font: 400 87.5%/1.5em 'Open Sans', sans-serif;
+  font: 400 87.5%/1.5em "Open Sans", sans-serif;
 }
 
 /* Form Layout */
@@ -74,7 +76,7 @@ form {
   border: none;
   border-bottom: 2px solid #e9e9e9;
   color: #666;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 1em;
   height: 50px;
   transition: border-color 0.3s;
@@ -97,7 +99,7 @@ form {
   color: #fff;
   cursor: pointer;
   height: 50px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 1.2em;
   letter-spacing: 0.05em;
   text-align: center;
