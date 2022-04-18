@@ -12,7 +12,7 @@
       <input type="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
     </div>
     <div class="button-panel">
-      <input type="submit" @click="createUser" class="button" title="Sign In" value="新規登録" />
+      <input type="submit" @click="SignUp()" class="button" title="Sign In" value="新規登録" />
     </div>
   </form>
 </div>
@@ -21,10 +21,6 @@
 
 <script>
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
-import { collection, addDoc } from "firebase/firestore"
-import DB from '@/config/firebase'
-
-const auth = getAuth();
 
 export default {
   name: 'Signup',
@@ -36,16 +32,16 @@ export default {
     }
   },
   methods: {
-    createUser() {
-      createUserWithEmailAndPassword(this.auth, this.email, this.password)
+    SignUp() {
+      let auth = getAuth()
+      createUserWithEmailAndPassword(auth, this.email, this.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        // ...
+        console.log('ユーザーを登録しました')
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
+        alert('ユーザーの登録に失敗しました!')
+        console.error(error)
       });
     }
   }
