@@ -1,19 +1,19 @@
 <template>
   <div class="about">
     <div class="form-wrapper">
-  <h1>Sign Up</h1>
-  <form @submit.prevent="signIn">
-    <div class="form-item">
-      <input type="email" autocomplete="email" v-model="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
+      <h1>Sign Up</h1>
+      <form @submit.prevent="signIn">
+        <div class="form-item">
+          <input type="email" autocomplete="email" v-model="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
+        </div>
+        <div class="form-item">
+          <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="メールアドレスを入力してください" />
+        </div>
+        <div class="button-panel">
+          <button type="submit" class="button">ログインする</button>
+        </div>
+      </form>
     </div>
-    <div class="form-item">
-      <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="メールアドレスを入力してください" />
-    </div>
-    <div class="button-panel">
-      <button type="submit" class="button">ログインする</button>
-    </div>
-  </form>
-</div>
   </div>
 </template>
 
@@ -22,28 +22,27 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/config/firebase";
 
 export default {
-  name: 'signIn',
+  name: "signIn",
   data: () => {
     return {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       error: null,
-    }
+    };
   },
   methods: {
     async signIn() {
-        console.log('ログインしました')
-        try {
-          await signInWithEmailAndPassword(auth, this.email, this.password)
-          // トップページへリダイレクト
-          await this.$router.push("/")
-      } catch (error){
-        console.error(error)
+      console.log("ログインしました");
+      try {
+        await signInWithEmailAndPassword(auth, this.email, this.password);
+        // トップページへリダイレクト
+        await this.$router.push("/");
+      } catch (error) {
+        console.error(error);
       }
-    }
-  }
-}
-
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -53,17 +52,21 @@ export default {
 /* fontawesome */
 @import url(http://weloveiconfonts.com/api/?family=fontawesome);
 [class*="fontawesome-"]:before {
-  font-family: 'FontAwesome', sans-serif;
+  font-family: "FontAwesome", sans-serif;
 }
 
 /* Simple Reset */
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 /* body */
 body {
   background: #e9e9e9;
   color: #5e5e5e;
-  font: 400 87.5%/1.5em 'Open Sans', sans-serif;
+  font: 400 87.5%/1.5em "Open Sans", sans-serif;
 }
 
 /* Form Layout */
@@ -93,7 +96,7 @@ form {
   border: none;
   border-bottom: 2px solid #e9e9e9;
   color: #666;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 1em;
   height: 50px;
   transition: border-color 0.3s;
@@ -116,7 +119,7 @@ form {
   color: #fff;
   cursor: pointer;
   height: 50px;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 1.2em;
   letter-spacing: 0.05em;
   text-align: center;
