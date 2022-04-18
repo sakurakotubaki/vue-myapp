@@ -10,4 +10,4 @@ const firebaseConfig = {
 };
 
 const config = initializeApp(firebaseConfig);
-export default config;
+export const auth = getAuth();
