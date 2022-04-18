@@ -31,10 +31,11 @@ export default {
     }
   },
   methods: {
-    async SignUp() {
+    async signUp() {
         console.log('確認点')
         try {
           await createUserWithEmailAndPassword(auth, this.email, this.password)
+          // トップページへリダイレクト
           await this.$router.push("/")
       } catch (error){
         console.error(error)
