@@ -2,17 +2,15 @@
   <div class="about">
     <div class="form-wrapper">
   <h1>Sign Up</h1>
-  <form>
+  <form @submit.prevent="signUp">
     <div class="form-item">
-      <label for="email"></label>
-      <input type="email" v-model="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
+      <input type="email" autocomplete="email" v-model="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
     </div>
     <div class="form-item">
-      <label for="password"></label>
-      <input type="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
+      <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
     </div>
     <div class="button-panel">
-      <input type="submit" @click="SignUp()" class="button" title="Sign In" value="新規登録" />
+      <button type="submit" class="button">会員登録を完了する</button>
     </div>
   </form>
 </div>
@@ -20,29 +18,31 @@
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword } from "firebase/auth"
+import { auth } from "@/config/firebase";
 
 export default {
   name: 'Signup',
   data: () => {
     return {
       email: '',
-      password: '',
-      error: null,
+      password: ''
     }
   },
   methods: {
-    SignUp() {
-      let auth = getAuth()
-      createUserWithEmailAndPassword(auth, this.email, this.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
+    async signUp() {
+
+      console.log('確認点')
+      try {
+        await createUserWithEmailAndPassword(auth, this.email, this.password)
+        await this.$router.push("/")
+        alert('ログインしました')
         console.log('ユーザーを登録しました')
-      })
-      .catch((error) => {
+      } catch (error) {
         alert('ユーザーの登録に失敗しました!')
         console.error(error)
-      });
+      }
+
     }
   }
 }
