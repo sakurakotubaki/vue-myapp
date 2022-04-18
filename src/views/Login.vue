@@ -12,7 +12,7 @@
           <input type="password" name="password" required="required" placeholder="パスワードを入力してください" />
         </div>
         <div class="button-panel">
-          <input type="submit" class="button" title="Sign In" value="ログイン" />
+          <input type="submit" @click="SignIn" class="button" title="Sign In" value="ログイン" />
         </div>
       </form>
       <div class="form-footer">
@@ -23,7 +23,35 @@
   </div>
 </template>
 
-<script></script>
+<script>
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+export default {
+  name: 'Signup',
+  data: () => {
+    return {
+      email: '',
+      password: '',
+      error: null,
+    }
+  },
+  methods: {
+    SignIn() {
+      let auth = getAuth();
+      signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log('ログイン成功')
+        })
+        .catch((error) => {
+          console.error(error)
+        });
+    }
+  }
+}
+
+</script>
 
 <style scoped>
 /* Fonts */

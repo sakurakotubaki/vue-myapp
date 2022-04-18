@@ -12,7 +12,7 @@
       <input type="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
     </div>
     <div class="button-panel">
-      <input type="submit" @click="SignUp()" class="button" title="Sign In" value="新規登録" />
+      <input type="submit" @click="SignUp" class="button" title="Sign In" value="新規登録" />
     </div>
   </form>
 </div>
