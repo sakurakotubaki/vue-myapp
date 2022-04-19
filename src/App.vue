@@ -2,6 +2,7 @@
   <div id="app">
     <nav>
       <router-link to="/">ホーム</router-link> |
+      <router-link to="/admin">ユーザー管理画面</router-link> |
       <router-link to="/login">ログイン</router-link> |
       <router-link to="/signup">新規登録</router-link>
     </nav>
