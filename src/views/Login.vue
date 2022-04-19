@@ -36,7 +36,9 @@ export default {
       try {
         await signInWithEmailAndPassword(auth, this.email, this.password);
         // トップページへリダイレクト
-        await this.$router.push("/");
+        // await this.$router.push("/");
+        // マイページへリダイレクト
+        await this.$router.push("/mypage");
       } catch (error) {
         console.error(error);
       }
