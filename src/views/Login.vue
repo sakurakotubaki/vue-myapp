@@ -34,11 +34,14 @@ export default {
     async signIn() {
       console.log("ログインしました");
       try {
-        await signInWithEmailAndPassword(auth, this.email, this.password);
-        // トップページへリダイレクト
-        // await this.$router.push("/");
-        // マイページへリダイレクト
-        await this.$router.push("/mypage");
+        let signWith = await signInWithEmailAndPassword(auth, this.email, this.password);
+        if (signWith) {
+          // マイページへリダイレクト
+          await this.$router.push("/mypage");
+        } else {
+          // トップページへリダイレクト
+          await this.$router.push("/");
+        }
       } catch (error) {
         console.error(error);
       }
