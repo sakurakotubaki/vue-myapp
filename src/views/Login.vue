@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <div class="form-wrapper">
-      <h1>Sign Up</h1>
+      <h1>Login</h1>
       <form @submit.prevent="signIn">
         <div class="form-item">
           <input type="email" autocomplete="email" v-model="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
@@ -12,6 +12,9 @@
         <div class="button-panel">
           <button type="submit" class="button">ログインする</button>
         </div>
+        <span class="forgot">
+          <router-link to="/">パスワードを忘れた</router-link>
+        </span>
       </form>
     </div>
   </div>
@@ -34,8 +37,8 @@ export default {
     async signIn() {
       console.log("ログインしました");
       try {
-        let signWith = await signInWithEmailAndPassword(auth, this.email, this.password);
-        if (signWith) {
+        await signInWithEmailAndPassword(auth, this.email, this.password);
+        if (this.signInWithEmailAndPassword) {
           // マイページへリダイレクト
           await this.$router.push("/mypage");
         } else {
