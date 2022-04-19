@@ -7,13 +7,13 @@
           <input type="email" autocomplete="email" v-model="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
         </div>
         <div class="form-item">
-          <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="メールアドレスを入力してください" />
+          <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
         </div>
         <div class="button-panel">
           <button type="submit" class="button">ログインする</button>
         </div>
         <span class="forgot">
-          <router-link to="/">パスワードを忘れた</router-link>
+          <router-link to="/forgot">パスワードを忘れた</router-link>
         </span>
       </form>
     </div>

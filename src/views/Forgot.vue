@@ -1,8 +1,8 @@
 <template>
   <div class="about">
     <div class="form-wrapper">
-      <h1>Sign Up</h1>
-      <form @submit.prevent="signUp">
+      <h1>Forgot</h1>
+      <form @submit.prevent="forGot">
         <div class="form-item">
           <input type="email" autocomplete="email" v-model="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
         </div>
@@ -10,7 +10,7 @@
           <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
         </div>
         <div class="button-panel">
-          <button type="submit" class="button">会員登録を完了する</button>
+          <button type="submit" class="button">再登録を申請する</button>
         </div>
       </form>
     </div>
@@ -18,23 +18,28 @@
 </template>
 
 <script>
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
+import { updateEmail } from "firebase/auth";
+import { updatePassword } from "firebase/auth";
 import { auth } from "@/config/firebase";
 
 export default {
-  name: "Signup",
+  name: "Forgot",
   data: () => {
     return {
       email: "",
-      password: "",
       error: null,
     };
   },
   methods: {
-    async signUp() {
+    async forGot() {
       console.log("確認点");
       try {
-        await createUserWithEmailAndPassword(auth, this.email, this.password);
+        let newPassword = getASecureRandomPassword();
+        await sendPasswordResetEmail(auth, this.email);
+        await updateEmail(auth.currentUser, this.email);
+        await updatePassword(user, this.newPassword);
+        alert('再登録のメールを送信しました')
         // トップページへリダイレクト
         await this.$router.push("/");
       } catch (error) {
