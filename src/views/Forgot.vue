@@ -6,9 +6,6 @@
         <div class="form-item">
           <input type="email" autocomplete="email" v-model="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
         </div>
-        <div class="form-item">
-          <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
-        </div>
         <div class="button-panel">
           <button type="submit" class="button">再登録を申請する</button>
         </div>
@@ -19,8 +16,6 @@
 
 <script>
 import { sendPasswordResetEmail } from "firebase/auth";
-import { updateEmail } from "firebase/auth";
-import { updatePassword } from "firebase/auth";
 import { auth } from "@/config/firebase";
 
 export default {
@@ -28,18 +23,14 @@ export default {
   data: () => {
     return {
       email: "",
-      error: null,
     };
   },
   methods: {
     async forGot() {
       console.log("確認点");
       try {
-        let newPassword = getASecureRandomPassword();
-        await sendPasswordResetEmail(auth, this.email);
-        await updateEmail(auth.currentUser, this.email);
-        await updatePassword(user, this.newPassword);
-        alert('再登録のメールを送信しました')
+        await sendPasswordResetEmail(auth, this.email)
+        alert('パスワードを更新しました')
         // トップページへリダイレクト
         await this.$router.push("/");
       } catch (error) {
