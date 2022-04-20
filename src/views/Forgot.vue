@@ -30,7 +30,7 @@ export default {
       console.log("確認点");
       try {
         await sendPasswordResetEmail(auth, this.email)
-        alert('パスワードを更新しました')
+        alert('メールアドレスにリクエストを送りました')
         // トップページへリダイレクト
         await this.$router.push("/");
       } catch (error) {
