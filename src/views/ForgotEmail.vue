@@ -33,8 +33,7 @@ export default {
     async forGot() {
       console.log("確認点");
       try {
-        await reauthenticateWithCredential(user, credential)
-        // await updateEmail(auth.currentUser, this.newEmail)
+        await updateEmail(auth.currentUser, this.newEmail)
         alert('メールアドレスを変更しました')
         // トップページへリダイレクト
         await this.$router.push("/");
