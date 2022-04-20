@@ -38,13 +38,7 @@ export default {
       console.log("ログインしました");
       try {
         await signInWithEmailAndPassword(auth, this.email, this.password);
-        if (this.signInWithEmailAndPassword) {
-          // マイページへリダイレクト
-          await this.$router.push("/mypage");
-        } else {
-          // トップページへリダイレクト
-          await this.$router.push("/");
-        }
+        await this.$router.push("/");
       } catch (error) {
         console.error(error);
       }
