@@ -3,9 +3,9 @@
     <div class="form-wrapper">
       <h1>Forgot</h1>
       <form @submit.prevent="forGot">
-        <!-- <div class="form-item">
+        <div class="form-item">
           <input type="email" autocomplete="email" v-model="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
-        </div> -->
+        </div>
         <div class="form-item">
           <input type="newEmail" autocomplete="newEmail" v-model="newEmail" name="newEmail" required="required" placeholder="新しメールアドレスを入力してください" />
         </div>
@@ -25,7 +25,7 @@ export default {
   name: "Forgot",
   data: () => {
     return {
-      // email: "",
+      email: "",
       newEmail: ""
     };
   },
@@ -33,9 +33,8 @@ export default {
     async forGot() {
       console.log("確認点");
       try {
-        await updateEmail(auth.currentUser, this.newEmail)
+        await updateEmail(auth.currentUser, this.email,this.newEmail)
         alert('メールアドレスを変更しました')
-        // トップページへリダイレクト
         await this.$router.push("/");
       } catch (error) {
         console.error(error);
