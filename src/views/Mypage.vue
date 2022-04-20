@@ -4,14 +4,3 @@
     <button>退会する</button>
   </div>
 </template>
-
-<script>
-
-export default {
-  data: () => {
-  },
-  methods : {
-    
-  },
-}
-</script>

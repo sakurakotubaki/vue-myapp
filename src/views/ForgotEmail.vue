@@ -1,45 +1,43 @@
 <template>
   <div class="about">
     <div class="form-wrapper">
-      <h1>Login</h1>
-      <form @submit.prevent="signIn">
-        <div class="form-item">
+      <h1>Forgot</h1>
+      <form @submit.prevent="forGot">
+        <!-- <div class="form-item">
           <input type="email" autocomplete="email" v-model="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
-        </div>
+        </div> -->
         <div class="form-item">
-          <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
+          <input type="newEmail" autocomplete="newEmail" v-model="newEmail" name="newEmail" required="required" placeholder="新しメールアドレスを入力してください" />
         </div>
         <div class="button-panel">
-          <button type="submit" class="button">ログインする</button>
+          <button type="submit" class="button">再登録を申請する</button>
         </div>
-        <span class="forgot">
-          <router-link to="/forgotPassword">パスワードを忘れた</router-link><br>
-          <router-link to="/forgotEmail">メールアドレスを忘れた</router-link>
-        </span>
       </form>
     </div>
   </div>
 </template>
 
 <script>
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { updateEmail } from "firebase/auth";
 import { auth } from "@/config/firebase";
 
 export default {
-  name: "signIn",
+  name: "Forgot",
   data: () => {
     return {
-      email: "",
-      password: "",
-      error: null,
+      // email: "",
+      newEmail: ""
     };
   },
   methods: {
-    async signIn() {
-      console.log("ログインしました");
+    async forGot() {
+      console.log("確認点");
       try {
-        await signInWithEmailAndPassword(auth, this.email, this.password);
-        await this.$router.push("/mypage");
+        await reauthenticateWithCredential(user, credential)
+        // await updateEmail(auth.currentUser, this.newEmail)
+        alert('メールアドレスを変更しました')
+        // トップページへリダイレクト
+        await this.$router.push("/");
       } catch (error) {
         console.error(error);
       }
