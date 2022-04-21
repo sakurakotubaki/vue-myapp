@@ -17,6 +17,7 @@
           <router-link to="/forgotEmail">メールアドレスを忘れた</router-link>
         </span>
       </form>
+      <p>{{user}}</p>
     </div>
   </div>
 </template>
@@ -24,6 +25,7 @@
 <script>
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/config/firebase";
+import Vuex from 'vuex'
 
 export default {
   name: "signIn",
@@ -33,6 +35,11 @@ export default {
       password: "",
       error: null,
     };
+  },
+  computed: {
+    user() {
+      return this.$store.getters.status
+    }
   },
   methods: {
     async signIn() {

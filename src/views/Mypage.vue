@@ -8,6 +8,7 @@
 <script>
 import { signOut } from "firebase/auth";
 import { auth } from "@/config/firebase";
+import store from "../store/index"
 
 export default {
   data() {
