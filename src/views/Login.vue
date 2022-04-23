@@ -46,7 +46,7 @@ export default {
       console.log("ログインしました");
       try {
         await signInWithEmailAndPassword(auth, this.email, this.password);
-        await this.$router.push("/mypage");
+        await this.$router.push("/my_page");
       } catch (error) {
         console.error(error);
       }
