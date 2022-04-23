@@ -54,7 +54,7 @@ const routes = [
     path: "*",
     // redirect: "/",
     name: "NotFound",
-    component: NotFound,
+    component: () => import(/* webpackChunkName: "about" */ '../views/NotFound.vue')
   },
 ]
 
