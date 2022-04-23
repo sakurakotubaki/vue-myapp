@@ -8,9 +8,6 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
-import { user } from "@/config/firebase";
-
-console.log(user)
 
 export default {
   name: "HomeView",
