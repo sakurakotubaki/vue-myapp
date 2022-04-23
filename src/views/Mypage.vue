@@ -2,7 +2,6 @@
   <div>
     <h1>ユーザー管理</h1>
     <button @click="logOut">ログアウト</button>
-    <p>{{ user }}</p>
   </div>
 </template>
 
@@ -12,12 +11,6 @@ import { auth } from "@/config/firebase";
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  mounted: {
-    ...mapActions(['setUser'])
-  },
-  computed: {
-    ...mapGetters(['user'])
-  },
   methods: {
     async logOut() {
       try {

@@ -2,8 +2,11 @@
   <div id="app">
     <nav>
       <router-link to="/">ホーム</router-link> |
-      <router-link to="/login">ログイン</router-link> |
-      <router-link to="/signup">新規登録</router-link>
+      <template v-if="!isLoginState">
+        <router-link v-if="!isLoginState" to="/login">ログイン</router-link> |
+        <router-link v-if="!isLoginState" to="/signup">新規登録</router-link> |
+      </template>
+      <router-link v-if="isLoginState" to="/my_page">マイページ</router-link>
       <p>ログインしていますか？: {{ isLoginState }}</p>
     </nav>
     <router-view/>
