@@ -35,6 +35,7 @@ export default {
         console.log('ログアウトに失敗しました')
       }
     },
+    // 削除メソッドを考えている?
     async deleteAccount() {
       try {
         await deleteUser(auth.user)
