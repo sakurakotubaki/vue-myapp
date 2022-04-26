@@ -8,22 +8,12 @@
 
 <script>
 import { signOut, deleteUser } from "firebase/auth";
-import { auth } from "@/config/firebase";
+import { auth, user } from "@/config/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import store from "@/store";
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-  mounted: function () {
-    onAuthStateChanged(auth, (user) => {
-      store.commit("setIsLogin", user !== null)
-    });
-  },
-  computed: {
-    isLoginState() {
-      return this.$store.state.isLogin;
-    }
-  },
   methods: {
     async logOut() {
       try {
@@ -35,15 +25,16 @@ export default {
         console.log('ログアウトに失敗しました')
       }
     },
-    // 削除メソッドを考えている?
     async deleteAccount() {
-      try {
-        await deleteUser(auth.user)
-        await this.$router.push("/");
-        console.log('アカウントを削除しました')
-      } catch (error) {
-        console.error(error)
-        console.log('アカウントの削除に失敗しました')
+      if(confirm("ユーザーを削除しますか？")) {
+        try {
+          await deleteUser(user.uid)
+          await this.$router.push("/");
+          console.log('アカウントを削除しました')
+        } catch (error) {
+          console.error(error)
+          console.log('アカウントの削除に失敗しました')
+        }
       }
     }
   }
