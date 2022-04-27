@@ -45,7 +45,8 @@ export default {
     async deleteAccount() {
       try {
         let credential = EmailAuthProvider.credential(this.email, this.password);
-        console.log(credential)
+        // console.log(credential)
+        console.table(credential) // オブジェクト見るならこちらの方が良い?
         console.log(this.email, this.password)
         window.alert('値が入ってきました')
         // await reauthenticateWithCredential(user, credential)
