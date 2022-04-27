@@ -42,9 +42,15 @@ export default {
         console.log('ログアウトに失敗しました')
       }
     },
-    deleteAccount() {
-      console.log(this.email, this.password)
-      window.alert('値が入ってきました')
+    async deleteAccount() {
+      try {
+        console.log(this.email, this.password)
+        window.alert('値が入ってきました')
+        // await reauthenticateWithCredential(user, credential)
+        console.log(this.user)
+      } catch (error) {
+        console.error(error)
+      }
     }
   }
 }
