@@ -12,7 +12,7 @@
           <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
         </div>
         <div class="button-panel">
-          <button type="submit" class="button"> ユーザを削除する</button>
+          <button type="submit" class="button"> アカウントを削除する</button>
         </div>
       </form>
     </div>
