@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { signOut, EmailAuthProvider } from "firebase/auth";
+import { signOut, EmailAuthProvider, reauthenticateWithCredential, deleteUser } from "firebase/auth";
 import { auth } from "@/config/firebase";
 import { mapActions, mapGetters } from 'vuex';
 
@@ -50,6 +50,7 @@ export default {
         console.log(this.email, this.password)
         window.alert('値が入ってきました')
         // await reauthenticateWithCredential(user, credential)
+        // await deleteUser(user)
         console.log(this.user)
       } catch (error) {
         console.error(error)
