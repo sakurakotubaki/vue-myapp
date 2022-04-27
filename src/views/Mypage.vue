@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { signOut } from "firebase/auth";
+import { signOut, EmailAuthProvider } from "firebase/auth";
 import { auth } from "@/config/firebase";
 import { mapActions, mapGetters } from 'vuex';
 
@@ -44,6 +44,8 @@ export default {
     },
     async deleteAccount() {
       try {
+        let credential = EmailAuthProvider.credential(this.email, this.password);
+        console.log(credential)
         console.log(this.email, this.password)
         window.alert('値が入ってきました')
         // await reauthenticateWithCredential(user, credential)
