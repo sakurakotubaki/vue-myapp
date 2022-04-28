@@ -20,9 +20,8 @@
 </template>
 
 <script>
-import { signOut, EmailAuthProvider, reauthenticateWithCredential, deleteUser } from "firebase/auth";
+import { signOut, EmailAuthProvider, reauthenticateWithCredential, deleteUser, onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/config/firebase";
-import { mapActions, mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -43,18 +42,23 @@ export default {
       }
     },
     async deleteAccount() {
-      try {
-        let credential = EmailAuthProvider.credential(this.email, this.password);
-        // console.log(credential)
-        console.table(credential) // オブジェクト見るならこちらの方が良い?
-        console.log(this.email, this.password)
-        window.alert('値が入ってきました')
-        // await reauthenticateWithCredential(user, credential)
-        // await deleteUser(user)
-        console.log(this.user)
-      } catch (error) {
-        console.error(error)
-      }
+      onAuthStateChanged(auth, (user) => {
+
+        const credential = EmailAuthProvider.credential(this.email, this.password);
+
+          if (user) {
+
+            reauthenticateWithCredential(user, credential);
+
+            deleteUser(user).then(() => {
+              this.$router.push("/");
+              alert("ユーザーを削除しました")
+            }).catch((e) => {
+              console.error(e);
+            });
+
+          }
+      });
     }
   }
 }
