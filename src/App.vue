@@ -6,7 +6,7 @@
         <router-link v-if="!isLoginState" to="/login">ログイン</router-link> |
         <router-link v-if="!isLoginState" to="/signup">新規登録</router-link> |
       </template>
-      <router-link v-if="isLoginState" to="/my_page">マイページ</router-link> |
+      <router-link v-if="isLoginState" to="/my_page">マイページ |</router-link>
       <router-link v-if="isLoginState" to="/update_email">メールアドレスを変更</router-link>
       <p>ログインしていますか？: {{ isLoginState }}</p>
     </nav>
