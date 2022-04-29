@@ -9,9 +9,7 @@
         <div class="form-item">
           <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
         </div>
-        <div class="button-panel">
-          <button type="submit" class="button">会員登録を完了する</button>
-        </div>
+        <SignUpBtn />
       </form>
     </div>
   </div>
@@ -20,8 +18,12 @@
 <script>
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/config/firebase";
+import SignUpBtn from "@/components/button/SignUpBtn.vue";
 
 export default {
+  components: {
+    SignUpBtn
+  },
   name: "Signup",
   data: () => {
     return {
@@ -106,30 +108,6 @@ form {
 .form-item input:focus {
   border-bottom: 2px solid #c0c0c0;
   outline: none;
-}
-
-.button-panel {
-  margin: 2em 0 0;
-  width: 100%;
-}
-
-.button-panel .button {
-  background: #f16272;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  height: 50px;
-  font-family: "Open Sans", sans-serif;
-  font-size: 1.2em;
-  letter-spacing: 0.05em;
-  text-align: center;
-  text-transform: uppercase;
-  transition: background 0.3s ease-in-out;
-  width: 100%;
-}
-
-.button:hover {
-  background: #ee3e52;
 }
 
 .form-footer {

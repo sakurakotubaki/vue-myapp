@@ -9,9 +9,7 @@
         <div class="form-item">
           <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
         </div>
-        <div class="button-panel">
-          <button type="submit" class="button">ログインする</button>
-        </div>
+        <LoginBtn />
         <span class="forgot">
           <router-link to="/forgotPassword">パスワードを忘れた</router-link><br>
         </span>
@@ -24,9 +22,13 @@
 <script>
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/config/firebase";
+import LoginBtn from "@/components/button/LoginBtn.vue";
 import Vuex from 'vuex'
 
 export default {
+  components: {
+    LoginBtn
+  },
   name: "signIn",
   data: () => {
     return {
