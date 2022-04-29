@@ -51,11 +51,11 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/UpdateEmail.vue')
   },
   {
-    path: "*",
+    path: '*',
     // redirect: "/",
-    name: "NotFound",
+    name: 'NotFound',
     component: () => import(/* webpackChunkName: "about" */ '../views/NotFound.vue')
-  },
+  }
 ]
 
 const router = new VueRouter({

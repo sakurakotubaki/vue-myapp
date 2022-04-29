@@ -8,9 +8,9 @@
 <script>
 export default {
   methods: {
-    goToHome() {
-      this.$router.push("/");
-    },
-  },
-};
+    goToHome () {
+      this.$router.push('/')
+    }
+  }
+}
 </script>

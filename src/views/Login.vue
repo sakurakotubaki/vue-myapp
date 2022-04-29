@@ -20,38 +20,39 @@
 </template>
 
 <script>
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/config/firebase";
-import LoginBtn from "@/components/button/LoginBtn.vue";
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '@/config/firebase'
+import LoginBtn from '@/components/button/LoginBtn.vue'
+// eslint-disable-next-line no-unused-vars
 import Vuex from 'vuex'
 
 export default {
   components: {
     LoginBtn
   },
-  name: "signIn",
+  name: 'signIn',
   data: () => {
     return {
-      email: "",
-      password: "",
-      error: null,
-    };
+      email: '',
+      password: '',
+      error: null
+    }
   },
   computed: {
-    user() {
+    user () {
       return this.$store.getters.status
     }
   },
   methods: {
-    async signIn() {
-      console.log("ログインしました");
+    async signIn () {
+      console.log('ログインしました')
       try {
-        await signInWithEmailAndPassword(auth, this.email, this.password);
-        await this.$router.push("/my_page");
+        await signInWithEmailAndPassword(auth, this.email, this.password)
+        await this.$router.push('/my_page')
       } catch (error) {
-        console.error(error);
+        console.error(error)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

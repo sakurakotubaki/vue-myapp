@@ -18,49 +18,46 @@
 </template>
 
 <script>
-import { signOut, EmailAuthProvider, reauthenticateWithCredential, onAuthStateChanged, updateEmail } from "firebase/auth";
-import { auth } from "@/config/firebase";
-import EmailUpdateBtn from "@/components/button/EmailUpdateBtn.vue";
+import { signOut, EmailAuthProvider, reauthenticateWithCredential, onAuthStateChanged, updateEmail } from 'firebase/auth'
+import { auth } from '@/config/firebase'
+import EmailUpdateBtn from '@/components/button/EmailUpdateBtn.vue'
 
 export default {
   components: {
     EmailUpdateBtn
   },
-  data() {
+  data () {
     return {
       email: '',
       password: ''
     }
   },
   methods: {
-    async logOut() {
+    async logOut () {
       try {
         await signOut(auth)
-        await this.$router.push("/");
+        await this.$router.push('/')
         console.log('ログアウトしました')
       } catch (error) {
         console.error(error)
         console.log('ログアウトに失敗しました')
       }
     },
-    async updateAccount() {
+    async updateAccount () {
       onAuthStateChanged(auth, (user) => {
+        const credential = EmailAuthProvider.credential(this.email, this.password)
 
-        const credential = EmailAuthProvider.credential(this.email, this.password);
+        if (user) {
+          reauthenticateWithCredential(user, credential)
 
-          if (user) {
-
-            reauthenticateWithCredential(user, credential);
-
-            updateEmail(user, this.email).then(() => {
-              this.$router.push("/");
-              alert("メールアドレスを変更しました。")
-            }).catch((e) => {
-              console.error(e);
-            });
-
-          }
-      });
+          updateEmail(user, this.email).then(() => {
+            this.$router.push('/')
+            alert('メールアドレスを変更しました。')
+          }).catch((e) => {
+            console.error(e)
+          })
+        }
+      })
     }
   }
 }

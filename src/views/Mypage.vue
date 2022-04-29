@@ -18,49 +18,47 @@
 </template>
 
 <script>
-import { signOut, EmailAuthProvider, reauthenticateWithCredential, deleteUser, onAuthStateChanged } from "firebase/auth";
-import { auth } from "@/config/firebase";
-import DeleteUserBtn from "@/components/button/DeleteUserBtn.vue";
+import { signOut, EmailAuthProvider, reauthenticateWithCredential, deleteUser, onAuthStateChanged } from 'firebase/auth'
+import { auth } from '@/config/firebase'
+import DeleteUserBtn from '@/components/button/DeleteUserBtn.vue'
 
 export default {
   components: {
     DeleteUserBtn
   },
-  data() {
+  name: 'MyPage',
+  data () {
     return {
       email: '',
-      password: '',
+      password: ''
     }
   },
   methods: {
-    async logOut() {
+    async logOut () {
       try {
         await signOut(auth)
-        await this.$router.push("/");
+        await this.$router.push('/')
         console.log('ログアウトしました')
       } catch (error) {
         console.error(error)
         console.log('ログアウトに失敗しました')
       }
     },
-    async deleteAccount() {
+    async deleteAccount () {
       onAuthStateChanged(auth, (user) => {
+        const credential = EmailAuthProvider.credential(this.email, this.password)
 
-        const credential = EmailAuthProvider.credential(this.email, this.password);
+        if (user) {
+          reauthenticateWithCredential(user, credential)
 
-          if (user) {
-
-            reauthenticateWithCredential(user, credential);
-
-            deleteUser(user).then(() => {
-              this.$router.push("/");
-              alert("ユーザーを削除しました")
-            }).catch((e) => {
-              console.error(e);
-            });
-
-          }
-      });
+          deleteUser(user).then(() => {
+            this.$router.push('/')
+            alert('ユーザーを削除しました')
+          }).catch((e) => {
+            console.error(e)
+          })
+        }
+      })
     }
   }
 }

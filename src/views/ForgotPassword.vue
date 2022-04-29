@@ -13,32 +13,32 @@
 </template>
 
 <script>
-import { sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "@/config/firebase";
-import ForgotPasswordBtn from "@/components/button/ForgotPasswordBtn.vue";
+import { sendPasswordResetEmail } from 'firebase/auth'
+import { auth } from '@/config/firebase'
+import ForgotPasswordBtn from '@/components/button/ForgotPasswordBtn.vue'
 
 export default {
   components: {
     ForgotPasswordBtn
   },
-  name: "Forgot",
+  name: 'ForgotPage',
   data: () => {
     return {
-      email: "",
-    };
+      email: ''
+    }
   },
   methods: {
-    async forGot() {
-      console.log("確認点");
+    async forGot () {
+      console.log('確認点')
       try {
         await sendPasswordResetEmail(auth, this.email)
         alert('メールアドレスにリクエストを送りました')
         // トップページへリダイレクト
-        await this.$router.push("/");
+        await this.$router.push('/')
       } catch (error) {
-        console.error(error);
+        console.error(error)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

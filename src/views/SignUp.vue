@@ -16,33 +16,33 @@
 </template>
 
 <script>
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/config/firebase";
-import SignUpBtn from "@/components/button/SignUpBtn.vue";
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '@/config/firebase'
+import SignUpBtn from '@/components/button/SignUpBtn.vue'
 
 export default {
   components: {
     SignUpBtn
   },
-  name: "Signup",
+  name: 'SignupPage',
   data: () => {
     return {
-      email: "",
-      password: "",
-      error: null,
-    };
+      email: '',
+      password: '',
+      error: null
+    }
   },
   methods: {
-    async signUp() {
-      console.log("確認点");
+    async signUp () {
+      console.log('確認点')
       try {
-        await createUserWithEmailAndPassword(auth, this.email, this.password);
+        await createUserWithEmailAndPassword(auth, this.email, this.password)
         // トップページへリダイレクト
-        await this.$router.push("/");
+        await this.$router.push('/')
       } catch (error) {
-        console.error(error);
+        console.error(error)
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>

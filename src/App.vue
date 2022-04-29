@@ -15,19 +15,19 @@
 </template>
 
 <script>
-import { auth } from "@/config/firebase";
-import { onAuthStateChanged } from "firebase/auth";
-import store from "@/store";
+import { auth } from '@/config/firebase'
+import { onAuthStateChanged } from 'firebase/auth'
+import store from '@/store'
 
 export default {
   mounted: function () {
     onAuthStateChanged(auth, (user) => {
-      store.commit("setIsLogin", user !== null)
-    });
+      store.commit('setIsLogin', user !== null)
+    })
   },
   computed: {
-    isLoginState() {
-      return this.$store.state.isLogin;
+    isLoginState () {
+      return this.$store.state.isLogin
     }
   }
 }
