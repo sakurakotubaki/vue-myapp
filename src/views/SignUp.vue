@@ -9,7 +9,7 @@
         <div class="form-item">
           <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
         </div>
-        <SignUpBtn />
+        <sign-up-btn />
       </form>
     </div>
   </div>

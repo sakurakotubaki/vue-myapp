@@ -9,7 +9,7 @@
         <div class="form-item">
           <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
         </div>
-        <LoginBtn />
+        <login-btn />
         <span class="forgot">
           <router-link to="/forgotPassword">パスワードを忘れた</router-link><br>
         </span>
