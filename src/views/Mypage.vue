@@ -16,29 +16,11 @@
         </div>
       </form>
     </div>
-    <hr>
-    <div class="form-wrapper">
-      <h1>メールアドレスを変更</h1>
-      <form @submit.prevent="updateAccount">
-        <div class="form-item">
-          <input type="email" autocomplete="email" v-model="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
-        </div>
-        <div class="form-item">
-          <input type="email" autocomplete="updateMail" v-model="updateMail" name="updateMail" required="required" placeholder="新しいメールアドレスを入力してください" />
-        </div>
-        <div class="form-item">
-          <input type="password" autocomplete="checkPass" v-model="checkPass" name="checkPass" required="required" placeholder="パスワードを入力してください" />
-        </div>
-        <div class="button-panel">
-          <button type="submit" class="button"> メールアドレスを変更</button>
-        </div>
-      </form>
-    </div>
   </div>
 </template>
 
 <script>
-import { signOut, EmailAuthProvider, reauthenticateWithCredential, deleteUser, onAuthStateChanged, updateEmail } from "firebase/auth";
+import { signOut, EmailAuthProvider, reauthenticateWithCredential, deleteUser, onAuthStateChanged } from "firebase/auth";
 import { auth } from "@/config/firebase";
 
 export default {
@@ -46,7 +28,6 @@ export default {
     return {
       email: '',
       password: '',
-      updateMail: ''
     }
   },
   methods: {
@@ -72,25 +53,6 @@ export default {
             deleteUser(user).then(() => {
               this.$router.push("/");
               alert("ユーザーを削除しました")
-            }).catch((e) => {
-              console.error(e);
-            });
-
-          }
-      });
-    },
-    async updateAccount() {
-      onAuthStateChanged(auth, (user) => {
-
-        const credential = EmailAuthProvider.credential(this.email, this.password);
-
-          if (user) {
-
-            reauthenticateWithCredential(user, credential);
-
-            updateEmail(user, this.updateMail).then(() => {
-              this.$router.push("/");
-              alert("メールアドレスを変更しました。")
             }).catch((e) => {
               console.error(e);
             });
