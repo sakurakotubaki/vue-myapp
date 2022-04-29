@@ -14,7 +14,6 @@
         </div>
         <span class="forgot">
           <router-link to="/forgotPassword">パスワードを忘れた</router-link><br>
-          <router-link to="/forgotEmail">メールアドレスを忘れた</router-link>
         </span>
       </form>
       <p>{{user}}</p>
