@@ -3,7 +3,7 @@
     <h1>ユーザー管理</h1>
     <button @click="logOut" class="btn btn--orange">ログアウト</button>
     <div class="form-wrapper">
-      <h1>メールアドレスを変更</h1>
+      <h2>メールアドレスを変更</h2>
       <form @submit.prevent="updateAccount">
         <div class="form-item">
           <input type="email" autocomplete="email" v-model="email" name="email" required="required" placeholder="新しいメールアドレスを入力してください" />

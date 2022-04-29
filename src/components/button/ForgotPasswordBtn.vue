@@ -6,14 +6,14 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .button-panel {
   margin: 2em 0 0;
   width: 100%;
 }
 
 .button-panel .button {
-  background: #f16272;
+  background: #5e4af0;
   border: none;
   color: #fff;
   cursor: pointer;
@@ -28,6 +28,6 @@
 }
 
 .button:hover {
-  background: #ee3e52;
+  background: #7e6fed;
 }
 </style>

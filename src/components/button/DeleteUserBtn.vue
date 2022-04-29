@@ -6,7 +6,7 @@
   </div>
 </template>
 
-<style>
+<style scoped>
 .button-panel {
   margin: 2em 0 0;
   width: 100%;
