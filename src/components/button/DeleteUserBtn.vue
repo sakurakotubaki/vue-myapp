@@ -7,22 +7,6 @@
 </template>
 
 <style>
-/* ButtonStyle */
-.btn--orange,
-button.btn--orange {
-  color: #fff;
-  background-color: #eb6100;
-}
-.btn--orange:hover,
-button.btn--orange:hover {
-  color: #fff;
-  background: #f56500;
-}
-
-button.btn--radius {
-   border-radius: 100vh;
-}
-
 .button-panel {
   margin: 2em 0 0;
   width: 100%;
