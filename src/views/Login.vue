@@ -9,7 +9,7 @@
         <div class="form-item">
           <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
         </div>
-        <login-btn />
+        <Button text="ログイン" color="#5e4af0" type="submit"/>
         <span class="forgot">
           <router-link to="/forgotPassword">パスワードを忘れた</router-link><br>
         </span>
@@ -22,13 +22,13 @@
 <script>
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '@/config/firebase'
-import LoginBtn from '@/components/button/LoginBtn.vue'
+import Button from '@/components/Button.vue'
 // eslint-disable-next-line no-unused-vars
 import Vuex from 'vuex'
 
 export default {
   components: {
-    LoginBtn
+    Button
   },
   name: 'signIn',
   data: () => {
