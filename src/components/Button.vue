@@ -1,54 +1,46 @@
 <template>
   <div>
     <div class="button-panel">
-      <button type="submit"
-      class="button"
-      :style="buttonColor">{{ text }}</button>
+      <button :type="type" class="button" :style="`background: ${color}`">{{ text }}</button>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ButtonComponent',
   props: {
     text: {
-      required: true,
-      default: 'ボタン',
-      type: String
+      type: String,
+      required: true
     },
     color: {
       type: String,
-      required: true,
-      default: 'red'
-    }
-  },
-  computed: {
-    buttonColor () {
-      return {
-        '--background-color': this.color
-      }
+      required: false,
+      default: '#f16272'
+    },
+    type: {
+      type: String,
+      required: false
     }
   }
 }
 </script>
 
-<style scoped>
-.button {
+<style lang="scss" scoped>
+.button-panel {
   margin: 2em 0 0;
   width: 100%;
-  background: #f16272;
+}
+
+.button-panel .button {
   border: none;
   color: #fff;
   cursor: pointer;
-  height: 50px;
-  font-family: "Open Sans", sans-serif;
-  font-size: 1.2em;
-  letter-spacing: 0.05em;
-  text-align: center;
   text-transform: uppercase;
   transition: background 0.3s ease-in-out;
   width: 100%;
-  background-color: var(--background-color);
+  &:hover {
+    opacity: 0.7;
+  }
 }
 </style>
