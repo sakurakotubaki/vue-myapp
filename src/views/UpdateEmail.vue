@@ -11,7 +11,7 @@
         <div class="form-item">
           <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
         </div>
-        <email-update-btn />
+        <Button text="メールアドレスを変更する" color="#e3d80b" />
       </form>
     </div>
   </div>
@@ -20,11 +20,11 @@
 <script>
 import { signOut, EmailAuthProvider, reauthenticateWithCredential, onAuthStateChanged, updateEmail } from 'firebase/auth'
 import { auth } from '@/config/firebase'
-import EmailUpdateBtn from '@/components/button/EmailUpdateBtn.vue'
+import Button from '@/components/Button.vue'
 
 export default {
   components: {
-    EmailUpdateBtn
+    Button
   },
   data () {
     return {
