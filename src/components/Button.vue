@@ -36,6 +36,11 @@ export default {
   border: none;
   color: #fff;
   cursor: pointer;
+  height: 50px;
+  font-family: "0pen Sans", sans-serif;
+  font-size: 1.2em;
+  letter-spacing: 0/05em;
+  text-align: center;
   text-transform: uppercase;
   transition: background 0.3s ease-in-out;
   width: 100%;
