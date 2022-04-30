@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>ユーザー管理</h1>
-    <button @click="logOut" class="btn btn--orange">ログアウト</button>
+    <button @click="logOut">ログアウト</button>
     <div class="form-wrapper">
       <h1>退会する</h1>
       <form @submit.prevent="deleteAccount">
@@ -11,7 +11,7 @@
         <div class="form-item">
           <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
         </div>
-        <delete-user-btn />
+        <Button text="アカウントを削除する" color="#ed0739" />
       </form>
     </div>
   </div>
@@ -20,11 +20,11 @@
 <script>
 import { signOut, EmailAuthProvider, reauthenticateWithCredential, deleteUser, onAuthStateChanged } from 'firebase/auth'
 import { auth } from '@/config/firebase'
-import DeleteUserBtn from '@/components/button/DeleteUserBtn.vue'
+import Button from '@/components/Button.vue'
 
 export default {
   components: {
-    DeleteUserBtn
+    Button
   },
   name: 'MyPage',
   data () {
