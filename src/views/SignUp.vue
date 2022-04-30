@@ -9,7 +9,7 @@
         <div class="form-item">
           <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
         </div>
-        <sign-up-btn />
+        <Button text="新規登録" color="#09ad35" type="submit"/>
       </form>
     </div>
   </div>
@@ -18,11 +18,11 @@
 <script>
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '@/config/firebase'
-import SignUpBtn from '@/components/button/SignUpBtn.vue'
+import Button from '@/components/Button.vue'
 
 export default {
   components: {
-    SignUpBtn
+    Button
   },
   name: 'SignupPage',
   data: () => {
