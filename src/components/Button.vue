@@ -1,19 +1,39 @@
 <template>
   <div>
     <div class="button-panel">
-      <button type="submit" class="button">アカウントを削除する</button>
+      <button :type="type" class="button" :style="`background: ${color}`">{{ text }}</button>
     </div>
   </div>
 </template>
 
-<style scoped>
+<script>
+
+export default {
+  props: {
+    text: {
+      type: String,
+      required: true
+    },
+    color: {
+      type: String,
+      required: false,
+      default: '#f16272'
+    },
+    type: {
+      type: String,
+      required: false
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
 .button-panel {
   margin: 2em 0 0;
   width: 100%;
 }
 
 .button-panel .button {
-  background: #f16272;
   border: none;
   color: #fff;
   cursor: pointer;
@@ -25,9 +45,9 @@
   text-transform: uppercase;
   transition: background 0.3s ease-in-out;
   width: 100%;
-}
 
-.button:hover {
-  background: #ee3e52;
+  &:hover {
+    opacity: 0.7;
+  }
 }
 </style>
