@@ -9,7 +9,7 @@
         <div class="form-item">
           <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
         </div>
-        <Button text="新規登録" color="#09ad35" type="submit"/>
+        <Button text="新規登録" color="#09ad35" />
       </form>
     </div>
   </div>
