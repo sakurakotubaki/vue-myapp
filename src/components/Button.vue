@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="button-panel">
-      <button type="button"
+      <button type="submit"
       class="button"
       :style="buttonColor">{{ text }}</button>
     </div>
