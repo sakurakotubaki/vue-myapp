@@ -6,7 +6,7 @@
         <div class="form-item">
           <input type="email" autocomplete="email" v-model="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
         </div>
-        <forgot-password-btn />
+        <Button text="再登録を申請する" color="#5e4af0" type="submit"/>
       </form>
     </div>
   </div>
@@ -15,11 +15,11 @@
 <script>
 import { sendPasswordResetEmail } from 'firebase/auth'
 import { auth } from '@/config/firebase'
-import ForgotPasswordBtn from '@/components/button/ForgotPasswordBtn.vue'
+import Button from '@/components/Button'
 
 export default {
   components: {
-    ForgotPasswordBtn
+    Button
   },
   name: 'ForgotPage',
   data: () => {
