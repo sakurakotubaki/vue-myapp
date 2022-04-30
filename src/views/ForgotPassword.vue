@@ -6,7 +6,7 @@
         <div class="form-item">
           <input type="email" autocomplete="email" v-model="email" name="email" required="required" placeholder="メールアドレスを入力してください" />
         </div>
-        <Button text="パスワードの登録を申請" color="#5e4af0" />
+        <Button text="再登録を申請する" color="#5e4af0"  type="submit"/>
       </form>
     </div>
   </div>

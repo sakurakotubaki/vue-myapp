@@ -11,7 +11,7 @@
         <div class="form-item">
           <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
         </div>
-        <Button text="メールアドレスを変更する" color="#e3d80b" />
+        <Button text="メールアドレスを変更する" color="#e3d80b" type="submit" />
       </form>
     </div>
   </div>

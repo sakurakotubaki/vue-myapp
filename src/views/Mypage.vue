@@ -11,7 +11,7 @@
         <div class="form-item">
           <input type="password" autocomplete="password" v-model="password" name="password" required="required" placeholder="パスワードを入力してください" />
         </div>
-        <Button text="アカウントを削除する" color="#ed0739" />
+        <Button text="アカウントを削除する" color="#ed0739" type="submit" />
       </form>
     </div>
   </div>
