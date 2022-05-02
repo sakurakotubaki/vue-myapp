@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { signOut, EmailAuthProvider, reauthenticateWithCredential, deleteUser, onAuthStateChanged } from 'firebase/auth'
+import { signOut, EmailAuthProvider, reauthenticateWithCredential, deleteUser } from 'firebase/auth'
 import { auth } from '@/config/firebase'
 import Button from '@/components/Button.vue'
 
@@ -33,6 +33,11 @@ export default {
       password: ''
     }
   },
+  computed: {
+    user () {
+      return this.$store.state.user
+    }
+  },
   methods: {
     async logOut () {
       try {
@@ -45,20 +50,18 @@ export default {
       }
     },
     async deleteAccount () {
-      onAuthStateChanged(auth, (user) => {
-        const credential = EmailAuthProvider.credential(this.email, this.password)
+      const credential = EmailAuthProvider.credential(this.email, this.password)
 
-        if (user) {
-          reauthenticateWithCredential(user, credential)
+      if (this.user) {
+        await reauthenticateWithCredential(this.user, credential)
 
-          deleteUser(user).then(() => {
-            this.$router.push('/')
-            alert('ユーザーを削除しました')
-          }).catch((e) => {
-            console.error(e)
-          })
-        }
-      })
+        deleteUser(this.user).then(() => {
+          this.$router.push('/')
+          alert('ユーザーを削除しました')
+        }).catch((e) => {
+          console.error(e)
+        })
+      }
     }
   }
 }

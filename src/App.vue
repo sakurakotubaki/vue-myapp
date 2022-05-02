@@ -23,6 +23,14 @@ export default {
   mounted: function () {
     onAuthStateChanged(auth, (user) => {
       store.commit('setIsLogin', user !== null)
+
+      if (user) {
+        store.commit('setUser', user)
+      }
+
+      if (user === null) {
+        store.commit('setUser', null)
+      }
     })
   },
   computed: {
