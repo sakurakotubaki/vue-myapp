@@ -40,15 +40,15 @@ export default {
   },
   computed: {
     user () {
-      return this.$store.getters.status
+      return this.$store.getters.user
     }
   },
   methods: {
     async signIn () {
-      console.log('ログインしました')
       try {
         await signInWithEmailAndPassword(auth, this.email, this.password)
         await this.$router.push('/my_page')
+        console.log('ログインしました')
       } catch (error) {
         console.error(error)
       }
