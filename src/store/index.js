@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { auth } from '@/config/firebase'
 
 Vue.use(Vuex)
 
@@ -13,12 +12,7 @@ export default new Vuex.Store({
     user: state => state.user
   },
   mutations: {
-    setUser: (state, setUser) => { state.user = auth.user },
+    setUser: (state, setUser) => { state.user = setUser },
     setIsLogin: (state, changeLoginState) => { state.isLogin = changeLoginState }
-  },
-  actions: {
-    setUser: context => { context.commit('SET_USER') }
-  },
-  modules: {
   }
 })
