@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { signOut, EmailAuthProvider, reauthenticateWithCredential, onAuthStateChanged, updateEmail } from 'firebase/auth'
+import { signOut, EmailAuthProvider, reauthenticateWithCredential, updateEmail } from 'firebase/auth'
 import { auth } from '@/config/firebase'
 import Button from '@/components/Button.vue'
 
@@ -30,6 +30,11 @@ export default {
     return {
       email: '',
       password: ''
+    }
+  },
+  computed: {
+    user () {
+      return this.$store.state.user
     }
   },
   methods: {
@@ -44,20 +49,18 @@ export default {
       }
     },
     async updateAccount () {
-      onAuthStateChanged(auth, (user) => {
-        const credential = EmailAuthProvider.credential(this.email, this.password)
+      const credential = EmailAuthProvider.credential(this.email, this.password)
 
-        if (user) {
-          reauthenticateWithCredential(user, credential)
+      if (this.user) {
+        await reauthenticateWithCredential(this.user, credential)
 
-          updateEmail(user, this.email).then(() => {
-            this.$router.push('/')
-            alert('メールアドレスを変更しました。')
-          }).catch((e) => {
-            console.error(e)
-          })
-        }
-      })
+        updateEmail(this.user, this.email).then(() => {
+          this.$router.push('/')
+          alert('メールアドレスを変更しました。')
+        }).catch((e) => {
+          console.error(e)
+        })
+      }
     }
   }
 }
