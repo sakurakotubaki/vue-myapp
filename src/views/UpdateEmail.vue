@@ -32,6 +32,12 @@ export default {
       password: ''
     }
   },
+  mounted () {
+    if (!this.$store.state.isLogin) {
+      this.$router.push('/')
+      alert('ログインしてください')
+    }
+  },
   computed: {
     user () {
       return this.$store.state.user
@@ -49,18 +55,19 @@ export default {
       }
     },
     async updateAccount () {
-      const credential = EmailAuthProvider.credential(this.email, this.password)
+      const credential = EmailAuthProvider.credential(this.user.email, this.password)
 
-      if (this.user) {
-        await reauthenticateWithCredential(this.user, credential)
+      console.log(credential)
+      await reauthenticateWithCredential(this.user, credential)
 
-        updateEmail(this.user, this.email).then(() => {
-          this.$router.push('/')
-          alert('メールアドレスを変更しました。')
-        }).catch((e) => {
-          console.error(e)
-        })
-      }
+      console.log('確認点2')
+
+      updateEmail(this.user, this.email).then(() => {
+        this.$router.push('/')
+        alert('メールアドレスを変更しました。')
+      }).catch((e) => {
+        console.error(e)
+      })
     }
   }
 }
