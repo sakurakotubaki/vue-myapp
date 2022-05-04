@@ -34,7 +34,7 @@ export default {
   },
   mounted () {
     if (!this.$store.state.isLogin) {
-      this.$router.push('/')
+      this.$router.push('/login')
       alert('ログインしてください')
     }
   },
