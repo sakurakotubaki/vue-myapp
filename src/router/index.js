@@ -36,11 +36,19 @@ const routes = [
   },
   {
     path: '/my_page',
-    name: 'mypage',
+    name: 'myPage',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Mypage.vue')
+  },
+  {
+    path: '/tweet_page',
+    name: 'tweetPage',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "about" */ '../views/Tweet.vue')
   },
   {
     path: '/update_email',
