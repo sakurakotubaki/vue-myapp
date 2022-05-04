@@ -24,7 +24,7 @@
 
 <script>
 import { signOut } from 'firebase/auth'
-import { auth } from '@/config/firebase'
+import { auth, db, collection, getDocs } from '@/config/firebase'
 import Button from '@/components/Button.vue'
 
 export default {
@@ -34,7 +34,16 @@ export default {
   name: 'MyPage',
   data () {
     return {
-      tweetValue: ''
+      tweetValue: '',
+      fireStore: []
+    }
+  },
+  mounted: {
+    async getCollection () {
+        const querySnapshot = await getDocs(collection(db, 'tweets'))
+        querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`)
+      })
     }
   },
   computed: {
