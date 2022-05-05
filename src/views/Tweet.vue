@@ -18,14 +18,14 @@
         <p v-if="!formValidation" v-bind:style="{ color: 'red' }">140文字未満で入力してください。</p>
         <Button text="投稿" color="#6a88eb" type="submit" />
       </form>
-      <div class="reed">
-        <ul>
-          <li v-for="store in stores" :key="store.id">
-            {{ store.id }}
-            {{ store.post }}
-          </li>
-        </ul>
-      </div>
+    </div>
+    <div class="reed">
+      <ul>
+        <li v-for="store in stores" :key="store.id">
+          {{ store.id }}
+          {{ store.post }}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -52,14 +52,9 @@ export default {
       ]
     }
   },
-  mounted: {
-    async getData () {
-      const querySnapshot = await getDocs(collection(db, 'tweets'))
-      querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`)
-      })
-      this.stores = doc
-    }
+  // mounted: functionと書かないと、thisで、getTweets()を呼べない?
+  mounted: function () {
+    this.getTweets()
   },
   computed: {
     user () {
@@ -81,7 +76,19 @@ export default {
       }
     },
     tweetMessage () {
+      if (!this.formValidation) return
       console.log(this.tweetValue)
+    },
+    async getTweets () {
+      const querySnapshot = await getDocs(collection(db, 'tweets'))
+      querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`)
+        this.stores.push({
+          id: doc.id,
+          post: doc.data().post
+        })
+      })
+      this.stores = doc
     }
   }
 }
