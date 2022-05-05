@@ -20,19 +20,20 @@
       </form>
     </div>
     <div class="reed">
+      <div class="scroll">
       <ul>
-        <li v-for="store in stores" :key="store.id">
-          {{ store.id }}
-          {{ store.post }}
+        <li v-for="tweet in tweets" :key="tweet.id">
+          {{ tweet.post }}
         </li>
       </ul>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { signOut } from 'firebase/auth'
-import { collection, doc, getDocs } from 'firebase/firestore'
+import { collection, getDocs } from 'firebase/firestore'
 import { auth, db } from '@/config/firebase'
 import Button from '@/components/Button.vue'
 
@@ -44,16 +45,10 @@ export default {
   data () {
     return {
       tweetValue: '',
-      stores: [
-        {
-          id: null,
-          post: null
-        }
-      ]
+      tweets: []
     }
   },
-  // mounted: functionと書かないと、thisで、getTweets()を呼べない?
-  mounted: function () {
+  mounted () {
     this.getTweets()
   },
   computed: {
@@ -83,13 +78,43 @@ export default {
       const querySnapshot = await getDocs(collection(db, 'tweets'))
       querySnapshot.forEach((doc) => {
         console.log(`${doc.id} => ${doc.data()}`)
-        this.stores.push({
+        this.tweets.push({
           id: doc.id,
           post: doc.data().post
         })
       })
-      this.stores = doc
+      console.log(this.tweets)
     }
   }
 }
 </script>
+
+<style scoped>
+
+div.reed {
+  display: flex;
+  justify-content: center;
+}
+
+div.reed {
+  margin: 1em;
+  font-size: 1.2em;
+}
+
+div.reed {
+  width: 200px;
+  height: 200px;
+  border: dotted;
+}
+
+div.reed {
+  margin: 1em;
+  font-size: 1.2em;
+  background-color: lightpink;
+}
+
+.scroll {
+  overflow: auto;
+}
+
+</style>
