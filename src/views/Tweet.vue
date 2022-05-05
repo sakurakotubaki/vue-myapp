@@ -18,13 +18,22 @@
         <p v-if="!formValidation" v-bind:style="{ color: 'red' }">140文字未満で入力してください。</p>
         <Button text="投稿" color="#6a88eb" type="submit" />
       </form>
+      <div class="reed">
+        <ul>
+          <li v-for="store in stores" :key="store.id">
+            {{ store.id }}
+            {{ store.post }}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import { signOut } from 'firebase/auth'
-import { auth, db, collection, getDocs } from '@/config/firebase'
+import { collection, doc, getDocs } from 'firebase/firestore'
+import { auth, db } from '@/config/firebase'
 import Button from '@/components/Button.vue'
 
 export default {
@@ -35,15 +44,21 @@ export default {
   data () {
     return {
       tweetValue: '',
-      fireStore: []
+      stores: [
+        {
+          id: null,
+          post: null
+        }
+      ]
     }
   },
   mounted: {
-    async getCollection () {
-        const querySnapshot = await getDocs(collection(db, 'tweets'))
-        querySnapshot.forEach((doc) => {
+    async getData () {
+      const querySnapshot = await getDocs(collection(db, 'tweets'))
+      querySnapshot.forEach((doc) => {
         console.log(`${doc.id} => ${doc.data()}`)
       })
+      this.stores = doc
     }
   },
   computed: {
