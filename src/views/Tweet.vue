@@ -21,9 +21,8 @@
     </div>
     <div class="reed">
       <ul>
-        <li v-for="store in stores" :key="store.id">
-          {{ store.id }}
-          {{ store.post }}
+        <li v-for="tweet in tweets" :key="tweet.id">
+          <p>{{ tweet.post }}</p>
         </li>
       </ul>
     </div>
@@ -32,7 +31,7 @@
 
 <script>
 import { signOut } from 'firebase/auth'
-import { collection, doc, getDocs } from 'firebase/firestore'
+import { collection, getDocs } from 'firebase/firestore'
 import { auth, db } from '@/config/firebase'
 import Button from '@/components/Button.vue'
 
@@ -44,16 +43,10 @@ export default {
   data () {
     return {
       tweetValue: '',
-      stores: [
-        {
-          id: null,
-          post: null
-        }
-      ]
+      tweets: []
     }
   },
-  // mounted: functionと書かないと、thisで、getTweets()を呼べない?
-  mounted: function () {
+  mounted () {
     this.getTweets()
   },
   computed: {
@@ -82,13 +75,12 @@ export default {
     async getTweets () {
       const querySnapshot = await getDocs(collection(db, 'tweets'))
       querySnapshot.forEach((doc) => {
-        console.log(`${doc.id} => ${doc.data()}`)
-        this.stores.push({
+        this.tweets.push({
           id: doc.id,
           post: doc.data().post
         })
       })
-      this.stores = doc
+      console.log(this.tweets)
     }
   }
 }
