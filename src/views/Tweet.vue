@@ -19,21 +19,21 @@
         <Button text="投稿" color="#6a88eb" type="submit" />
       </form>
     </div>
-    <div class="reed">
-      <div class="scroll">
-      <ul>
-        <li v-for="tweet in tweets" :key="tweet.id">
-          {{ tweet.post }}
-        </li>
-      </ul>
+    <div class="reed-container">
+        <div class="scroll">
+        <ul class="ul-container">
+          <li class="li-container" v-for="tweet in tweets" :key="tweet.id">
+            {{ tweet.post }}
+          </li>
+        </ul>
+        </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
 import { signOut } from 'firebase/auth'
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, addDoc } from 'firebase/firestore'
 import { auth, db } from '@/config/firebase'
 import Button from '@/components/Button.vue'
 
@@ -70,9 +70,17 @@ export default {
         console.log('ログアウトに失敗しました')
       }
     },
-    tweetMessage () {
+    // tweetMessage () {
+    //   if (!this.formValidation) return
+    //   console.log(this.tweetValue)
+    // },
+    async tweetMessage () {
       if (!this.formValidation) return
-      console.log(this.tweetValue)
+      const docRef = await addDoc(collection(db, 'tweets'), {
+        post: this.tweetValue
+      })
+      console.log('フォームのデータid: ', docRef.id)
+      console.log('フォームのデータ: ', docRef.post)
     },
     async getTweets () {
       const querySnapshot = await getDocs(collection(db, 'tweets'))
@@ -89,32 +97,24 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
-div.reed {
+.reed-container {
   display: flex;
   justify-content: center;
-}
 
-div.reed {
-  margin: 1em;
-  font-size: 1.2em;
-}
+  & .ul-container {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    height: 300px;
+    margin: 1em;
+    font-size: 1.2em;
 
-div.reed {
-  width: 200px;
-  height: 200px;
-  border: dotted;
+    & .li-container {
+      background-color: #fafafa;
+    }
+  }
 }
-
-div.reed {
-  margin: 1em;
-  font-size: 1.2em;
-  background-color: lightpink;
-}
-
-.scroll {
-  overflow: auto;
-}
-
 </style>
