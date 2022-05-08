@@ -20,15 +20,13 @@
       </form>
     </div>
     <div class="reed-container">
-        <div class="scroll">
         <ul class="ul-container">
           <li class="li-container" v-for="tweet in tweets" :key="tweet.id">
-            {{ tweet.post }}
+            <span class="span-container">{{ tweet.post }}</span>
           </li>
         </ul>
         </div>
       </div>
-    </div>
 </template>
 
 <script>
@@ -70,10 +68,6 @@ export default {
         console.log('ログアウトに失敗しました')
       }
     },
-    // tweetMessage () {
-    //   if (!this.formValidation) return
-    //   console.log(this.tweetValue)
-    // },
     async tweetMessage () {
       if (!this.formValidation) return
       const docRef = await addDoc(collection(db, 'tweets'), {
@@ -99,6 +93,18 @@ export default {
 
 <style lang="scss" scoped>
 
+@media screen and (max-width:768px) {
+  .reed-container {
+    background-color: purple;
+  }
+}
+
+@media screen and (max-width:488px) {
+  .reed-container {
+    background-color: orange;
+  }
+}
+
 .reed-container {
   display: flex;
   justify-content: center;
@@ -109,11 +115,16 @@ export default {
     flex-direction: column;
     width: 500px;
     height: 300px;
-    margin: 1em;
     font-size: 1.2em;
 
     & .li-container {
-      background-color: #fafafa;
+      background-color: #eee;
+      text-align: left;
+
+      & .span-container {
+        margin: 30px 0 0 30px;
+        background: pink;
+      }
     }
   }
 }
