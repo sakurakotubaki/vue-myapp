@@ -31,7 +31,7 @@
 
 <script>
 import { signOut } from 'firebase/auth'
-import { collection, getDocs, addDoc } from 'firebase/firestore'
+import { collection, getDocs, doc, setDoc } from 'firebase/firestore'
 import { auth, db } from '@/config/firebase'
 import Button from '@/components/Button.vue'
 
@@ -70,7 +70,7 @@ export default {
     },
     async tweetMessage () {
       if (!this.formValidation) return
-      const docRef = await addDoc(collection(db, 'tweets'), {
+      const docRef = await setDoc(doc(db, 'tweets', this.post), {
         post: this.tweetValue
       })
       console.log('フォームのデータid: ', docRef.id)
