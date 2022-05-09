@@ -8,6 +8,7 @@
       </template>
       <router-link v-if="isLoginState" to="/my_page">マイページ |</router-link>
       <router-link v-if="isLoginState" to="/tweet_page">投稿ページ |</router-link>
+      <router-link v-if="isLoginState" to="/timeline_page">タイムラインページ |</router-link>
       <router-link v-if="isLoginState" to="/update_email">メールアドレスを変更</router-link>
       <p>ログインしていますか？: {{ isLoginState }}</p>
     </nav>
