@@ -1,24 +1,7 @@
 <template>
   <div>
-    <h1>投稿ページ</h1>
+    <h1>タイムラインページ</h1>
     <button @click="logOut">ログアウト</button>
-    <div class="form-wrapper">
-      <h1>メッセージを投稿する</h1>
-      <form @submit.prevent="tweetMessage">
-        <div class="form-item">
-          <label for="tweet">投稿する内容を入力</label><br>
-          <textarea
-          name="tweet"
-          id="tweet"
-          cols="30"
-          rows="10"
-          v-model="tweetValue"
-          ></textarea>
-        </div>
-        <p v-if="!formValidation" v-bind:style="{ color: 'red' }">140文字未満で入力してください。</p>
-        <Button text="投稿" color="#6a88eb" type="submit" />
-      </form>
-    </div>
     <div class="reed-container">
         <ul class="ul-container">
           <li class="li-container" v-for="tweet in tweets" :key="tweet.id">
@@ -31,18 +14,13 @@
 
 <script>
 import { signOut } from 'firebase/auth'
-import { collection, getDocs, doc, setDoc } from 'firebase/firestore'
+import { collection, getDocs } from 'firebase/firestore'
 import { auth, db } from '@/config/firebase'
-import Button from '@/components/Button.vue'
 
 export default {
-  components: {
-    Button
-  },
   name: 'MyPage',
   data () {
     return {
-      tweetValue: '',
       tweets: []
     }
   },
@@ -52,9 +30,6 @@ export default {
   computed: {
     user () {
       return this.$store.state.user
-    },
-    formValidation () {
-      return this.tweetValue.length < 140
     }
   },
   methods: {
@@ -67,14 +42,6 @@ export default {
         console.error(error)
         console.log('ログアウトに失敗しました')
       }
-    },
-    async tweetMessage () {
-      if (!this.formValidation) return
-      const docRef = await setDoc(doc(db, 'tweets', this.post), {
-        post: this.tweetValue
-      })
-      console.log('フォームのデータid: ', docRef.id)
-      console.log('フォームのデータ: ', docRef.post)
     },
     async getTweets () {
       const querySnapshot = await getDocs(collection(db, 'tweets'))
@@ -106,6 +73,7 @@ export default {
 }
 
 .reed-container {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
 
