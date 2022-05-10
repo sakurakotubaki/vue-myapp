@@ -4,7 +4,7 @@
     <button @click="logOut">ログアウト</button>
     <div class="form-wrapper">
       <h1>メッセージを投稿する</h1>
-      <form @submit.prevent="tweetMessage">
+      <form @submit.prevent="createPostTweet">
         <div class="form-item">
           <label for="tweet">投稿する内容を入力</label><br>
           <textarea
@@ -31,7 +31,7 @@
 
 <script>
 import { signOut } from 'firebase/auth'
-import { collection, getDocs, doc, setDoc } from 'firebase/firestore'
+import { collection, getDocs, doc, setDoc, addDoc } from 'firebase/firestore'
 import { auth, db } from '@/config/firebase'
 import Button from '@/components/Button.vue'
 
@@ -68,13 +68,15 @@ export default {
         console.log('ログアウトに失敗しました')
       }
     },
-    async tweetMessage () {
+    async createPostTweet () {
       if (!this.formValidation) return
-      const docRef = await setDoc(doc(db, 'tweets', this.post), {
+      console.log(this.tweetValue)
+      const docRef = await addDoc(collection(db, 'tweets'), {
         post: this.tweetValue
       })
-      console.log('フォームのデータid: ', docRef.id)
-      console.log('フォームのデータ: ', docRef.post)
+      await setDoc(doc(db, 'tweets', docRef.id), {
+        post: this.tweetValue
+      })
     },
     async getTweets () {
       const querySnapshot = await getDocs(collection(db, 'tweets'))
